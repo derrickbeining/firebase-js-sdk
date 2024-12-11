@@ -37,10 +37,11 @@ import {
  * @public
  */
 export async function fetchAndActivate(
-  remoteConfig: RemoteConfig
+  remoteConfig: RemoteConfig,
+  options?: { analyticsUserProperties?: Record<string, unknown> }
 ): Promise<boolean> {
   remoteConfig = getModularInstance(remoteConfig);
-  await fetchConfig(remoteConfig);
+  await fetchConfig(remoteConfig, options);
   return activate(remoteConfig);
 }
 

@@ -92,8 +92,9 @@ export class RestClient implements RemoteConfigFetchClient {
       app_instance_id: installationId,
       app_instance_id_token: installationToken,
       app_id: this.appId,
-      language_code: getUserLanguage()
+      language_code: getUserLanguage(),
       /* eslint-enable camelcase */
+      ...(request.body || {})
     };
 
     const options = {

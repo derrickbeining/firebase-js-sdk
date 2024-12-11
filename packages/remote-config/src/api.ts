@@ -93,9 +93,13 @@ export function ensureInitialized(remoteConfig: RemoteConfig): Promise<void> {
 /**
  * Fetches and caches configuration from the Remote Config service.
  * @param remoteConfig - The {@link RemoteConfig} instance.
+ * @param options - Additional configuration for the request
  * @public
  */
-export async function fetchConfig(remoteConfig: RemoteConfig): Promise<void> {
+export async function fetchConfig(
+  remoteConfig: RemoteConfig,
+  options?: { analyticsUserProperties?: Record<string, unknown> }
+): Promise<void> {
   const rc = getModularInstance(remoteConfig) as RemoteConfigImpl;
   // Aborts the request after the given timeout, causing the fetch call to
   // reject with an `AbortError`.
@@ -118,7 +122,8 @@ export async function fetchConfig(remoteConfig: RemoteConfig): Promise<void> {
   try {
     await rc._client.fetch({
       cacheMaxAgeMillis: rc.settings.minimumFetchIntervalMillis,
-      signal: abortSignal
+      signal: abortSignal,
+      body: { analyticsUserProperties: options?.analyticsUserProperties }
     });
 
     await rc._storageCache.setLastFetchStatus('success');

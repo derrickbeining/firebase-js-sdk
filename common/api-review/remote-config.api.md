@@ -13,10 +13,14 @@ export function activate(remoteConfig: RemoteConfig): Promise<boolean>;
 export function ensureInitialized(remoteConfig: RemoteConfig): Promise<void>;
 
 // @public
-export function fetchAndActivate(remoteConfig: RemoteConfig): Promise<boolean>;
+export function fetchAndActivate(remoteConfig: RemoteConfig, options?: {
+    analyticsUserProperties?: Record<string, unknown>;
+}): Promise<boolean>;
 
 // @public
-export function fetchConfig(remoteConfig: RemoteConfig): Promise<void>;
+export function fetchConfig(remoteConfig: RemoteConfig, options?: {
+    analyticsUserProperties?: Record<string, unknown>;
+}): Promise<void>;
 
 // @public
 export type FetchStatus = 'no-fetch-yet' | 'success' | 'failure' | 'throttle';

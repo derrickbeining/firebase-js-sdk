@@ -99,6 +99,11 @@ export interface FetchRequest {
    * <p>Comparable to passing `headers = { 'If-None-Match': <eTag> }` to the native Fetch API.
    */
   eTag?: string;
+
+  /**
+   * Appends the request body with any key-value pairs you define
+   */
+  body?: Record<string, unknown>;
 }
 
 /**
